@@ -71,7 +71,7 @@ public class SuffixTree{
                     //FileOutputStream os = new FileOutputStream((fileo));
                     if(chec==-1){
                         int len = st.length()-1;
-                        System.out.println("The asterisk line st.length is "+len);
+                        //System.out.println("The asterisk line st.length is "+len);
                         for(int q=0; q<len;q++){
                             for(int r=q;r<len;r++){
                                 //System.out.println(q + " " + r);
@@ -81,7 +81,7 @@ public class SuffixTree{
                         }
                     }
                     else if(chec==0){
-                        System.out.println("chec=0 at "+st2);
+                        //System.out.println("chec=0 at "+st2);
                         //System.exit(0);
                         search(st2);
                         int k =0; 
@@ -96,43 +96,53 @@ public class SuffixTree{
                     }
                     else if(chec==1){
                         //System.out.println("Ran search(S2) and string is "+ s2);
-                        System.out.println("chec=1 at "+st2);
+                        //System.out.println("chec=1 at "+st2);
                         search(s2);
                         int k = 0, l = 0;
-                        while(l< anodes2.size()){
-                            k=0;
-                            while(k <= anodes2.get(l).s){
+                        
+                        while(k <= anodes2.get(anodes2.size()-1).s){
+                            l=0;
+                            while(l< anodes2.size() && (anodes2.get(l).s<st.length())){
                                 //System.out.println(k + " " + anodes2.get(l).e);
+                                if(k<=anodes2.get(l).s){
                                 w=k+" "+anodes2.get(l).e;
                                 p.println(w);
-                                k++;
+                              }
+                            
+                                
+                                l++;
                             }
-                            l++;
+                            k++;
                         }
                         anodes2 = new ArrayList<>();
                     }
                     else if(chec==2){
                         //System.out.println("The string searched is "+ s1);
-                        System.out.println("chec=2 at "+st2);
+                        //System.out.println("chec=2 at "+st2);
                         search(s1);
                         int k = 0, l = 0;
                         //System.out.println("l=0 "+anodes1.get(0).s);
                         //System.out.println("l=1 "+anodes1.get(1).s);
+                        //if(anodes2.size()>1){anodes2.remove(anodes2.size()-1);}
                         while(l<anodes1.size()){
                             k=0;
                             while((k+anodes1.get(l).e)<st.length()-1){
                                 //System.out.println(anodes1.get(l).s + " " + (k+anodes1.get(l).e));
                                 w = anodes1.get(l).s + " " + (k+anodes1.get(l).e);
                                 //os.write(anodes1.get(l).s + " " + (k+anodes1.get(l).e));
+                                //if(k+anodes1.get(l).e != st.length()-2){
                                 p.println(w);
                                 k++;
+                            //}
+                                //k++;
+
                             }
                             l++;
                         }
                         anodes1 = new ArrayList<>();
                     }
                     else if(chec==3){
-                        System.out.println("chec=3 at "+st2);
+                        //System.out.println("chec=3 at "+st2);
                         chec=2;
                         //System.out.println("S1 is "+s1);
                         
@@ -151,7 +161,7 @@ public class SuffixTree{
                             k=0;
                             while(k<anodes2.size()){
                                 //System.out.println("In k loop: "+ k);
-                                if(anodes1.get(l).e<anodes2.get(k).s){
+                                if(anodes1.get(l).e<anodes2.get(k).s && anodes2.get(k).e<st.length()-1){
                                     //os.write(anodes1.get(l).s + " " + anodes2.get(l).e);
                                     //System.out.println(anodes1.get(l).s + " " + anodes2.get(k).e);
                                     w = anodes1.get(l).s + " " + anodes2.get(k).e;
